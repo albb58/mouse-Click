@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<style type="text/css">
+			html, body{
+				width: 100%; height: 100%;
+				overflow: hidden;
+			}
+			.msg {
+				position: absolute;
+				cursor: none;
+			}
+		</style>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="js/mouseanimate.js" type="text/javascript" charset="utf-8"></script> -->
+		<script src="js/jquery-1.9.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				// mouserAnimate(window);
+				$(window).mousedown((e) => {
+					//判断左键点击
+					if(e.which == 1){
+						//特效内容:可以自己更改感兴趣的内容
+						var content = [
+							"用心创造快乐",
+							"没钱玩你妈比",
+							"氪金你才会更强",
+							"搏一搏单车变摩托",
+							"赢了会所嫩模",
+							"输了楼顶天台"
+						];
+						//随机抽取数组内容:数组[随机下标]
+						var val = content[Math.round(Math.random() * (content.length - 1))];
+						//创建标签
+						var sp = $("<span>");
+						//添加css
+						sp.addClass("msg");
+						//添加内容
+						sp.text(val);
+						//内容定位
+						let pos = {
+							x: e.pageX - 10,
+							y: e.pageY - 40
+						}
+						//随机属性
+						sp.css({
+							color: randomColor(),
+							fontSize: 13,
+							top: pos.y,
+							left: pos.x
+						});
+						//添加到dom树中
+						sp.appendTo($(document.body))
+						//动画效果:出现位置到消失位置
+						sp.animate({
+							left: pos.x,
+							top: pos.y - 60
+						}, 300, function () {
+							//到达消失位置删除
+							sp.remove();
+						})
+					}
+				})
+			})
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>
